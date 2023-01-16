@@ -4,7 +4,7 @@ import axios from "axios";
 const RandomPokemon = () => {
   const randomNumber = Math.floor(Math.random() * 1010);
 
-  const [random, setRandom] = useState();
+  const [random, setRandom] = useState([]);
 
   const fetchRandomPokemon = async () => {
     try {
@@ -25,7 +25,7 @@ const RandomPokemon = () => {
 
   return (
     <div>
-      {/* <h1>{random.name}</h1>
+      <h1>{random.name}</h1>
       {random.abilities ? (
         random.abilities.map((e, i) => {
           return (
@@ -36,14 +36,30 @@ const RandomPokemon = () => {
         })
       ) : (
         <p>No abilities</p>
-      )} */}
-      {/* {random.types ? (
-                random.types.map((e) => {
-                    return(
-                        <p>{e.type.name}</p>
-                    )
-                })
-            )} */}
+      )}
+      {random.types ? (
+        random.types.map((e, i) => {
+          return (
+            <div key={i}>
+            <p>{e.type.name}</p>
+            </div>
+        )})
+      ) : (
+        <p>Types not available</p>
+      )}
+      {random.stats ? (
+        random.stats.map((e, i) => {
+          return (
+            <div key={i}>
+                <p>{e.stat.name}</p>
+                <p>{e.base_stat}</p>
+                <p>{e.effort}</p>
+            </div>
+          )
+        })
+      ) : (
+        <p>Stats not available</p>
+      )}
     </div>
   );
 };
