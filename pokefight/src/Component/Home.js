@@ -10,9 +10,8 @@ const Home = () => {
     </div>
     <div>
         <h1>The Pokefight</h1>
-        <RandomPokemon />
     </div>
-    
+    <RandomPokemon />
     
     </div>)
 }

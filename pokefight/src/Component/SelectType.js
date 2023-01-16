@@ -1,6 +1,7 @@
 import {useState,useEffect} from "react"
 import {useNavigate} from "react-router-dom"
 import axios from 'axios'
+import SearchBar from "./SearchBar"
 
 const SelectType = () => {
 
@@ -23,14 +24,14 @@ useEffect(()=>{
 },[])
 
 
-    return (<>
-    <div>
-    {species.map((e,i)=>
-    <button key={i} onClick={() => navigate(`/selectPokemon/${e.name}`)}>{e.name}</button>
-    )}
-    {}
-    </div>
-    </>)
+    return (
+      <>
+      <SearchBar/>
+           <br/>   
+          {species.map((e,i)=>
+          <button key={i} onClick={() => navigate(`/selectPokemon/${e.name}`)}>{e.name}</button>
+          )}
+          </>)
 }
 
 export default SelectType
