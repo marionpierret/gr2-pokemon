@@ -1,11 +1,13 @@
 import {useParams} from "react-router-dom"
 import {useState,useEffect} from "react"
 import axios from 'axios'
+import Stats from "./Stats"
 
 const ListByType = () => {
 
     const {type} = useParams()
     const [listByType,setListByType] = useState([])
+    
     console.log(type)
     const fetchData = async () => {
         try {
@@ -19,18 +21,6 @@ const ListByType = () => {
         }
       };
 
-
-    const fetchDetails = async (e) => {
-        try {
-          const callData = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon/${e}`
-          );
-          setListByType(callData.data.pokemon);
-    
-        } catch (err) {
-          console.log(err);
-        }
-      }; 
     
     useEffect(()=>{
         fetchData()
@@ -45,13 +35,16 @@ console.log(listByType)
     <div className="flip-card-inner">
         <div className="flip-card-front">
             <p className="title">{e.pokemon.name}</p>
-            <p><img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}.png`} alt="logoPokemon"/>
-                
-                {console.log(e.pokemon.url.substr(34, e.pokemon.url.length).replace("/",""))}</p>
+            <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}.png`} alt="logoPokemon"/>
+      
+              
+               
         </div>
         <div className="flip-card-back">
-            <p className="title">BACK</p>
-            <p>Leave Me</p>
+            <p className="title">Stats</p>
+            <div >
+            <Stats id={e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}/>
+            </div>
         </div>
     </div>
 </div>

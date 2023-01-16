@@ -13,7 +13,6 @@ const fetchData = async () => {
         `https://pokeapi.co/api/v2/type/`
       );
       setSpecies(callData.data.results);
-
     } catch (err) {
       console.log(err);
     }
@@ -25,9 +24,12 @@ useEffect(()=>{
 
 
     return (<>
+    <div>
     {species.map((e,i)=>
     <button key={i} onClick={() => navigate(`/selectPokemon/${e.name}`)}>{e.name}</button>
     )}
+    {}
+    </div>
     </>)
 }
 

@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom"
+import RandomPokemon from "./RandomPokemon"
 
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
     </div>
     <div>
         <h1>The Pokefight</h1>
-
+        <RandomPokemon />
     </div>
     
     
