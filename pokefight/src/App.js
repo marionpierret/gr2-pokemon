@@ -1,23 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
+import Home from "./Component/Home"
+import SelectType from "./Component/SelectType"
+import ListByType from "./Component/ListByType"
+import { Route, Routes } from 'react-router';
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Routes>
+      <Route path="/" element={<Home/>} />
+      <Route path="/selectPokemon" element={<SelectType/>} />
+      <Route path="/selectPokemon/:type" element={<ListByType/>} />
+     </Routes>
     </div>
   );
 }
