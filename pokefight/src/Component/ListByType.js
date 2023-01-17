@@ -63,7 +63,7 @@ const ListByType = () => {
     };
   
     const fetchDataDetails = async (id) => {
-      console.log(id)
+
       try {
           const callData = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${id}`
@@ -75,14 +75,14 @@ const ListByType = () => {
         }
       };
    
-      console.log(data.name)
+      // console.log(type)
 
     return (
     <div className="listByType">
     <div className="cardPoke">
     <button onClick={()=> changeSliceMoins()}>-</button>
     {listByType.slice(slice.start,slice.end).map((e,i) =>
-    <>
+    
     
     <div key={i} className="flip-card" onClick={() => setDisplayPokedex(!displayPokedex) & fetchDataDetails(e.pokemon.url.substr(34, e.pokemon.url.length).replace("/",""))}>
     {/* <div className="flip-card-inner">
@@ -93,11 +93,11 @@ const ListByType = () => {
             /> 
            
         </div> */}
-        <Card name={e.pokemon.name} id={e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}/>
+        <Card name={e.pokemon.name} type={type} id={e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}/>
     </div>
   
     
-    </>
+    
     )}
     <button  onClick={()=> changeSlicePlus()}>+</button>
    

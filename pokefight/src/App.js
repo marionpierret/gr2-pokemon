@@ -8,10 +8,12 @@ import SelectType from './Component/SelectType';
 import NavBar from './Component/NavBar';
 import Fight from './Component/Fight';
 import {PokemonController} from "./Component/PokemonContext"
+import {RandomController} from "./Component/RandomContext"
 
 const App = () => {
   return (
     <div className="App">
+      <RandomController>
       <PokemonController>
       <NavBar/>
      <Routes>
@@ -23,6 +25,7 @@ const App = () => {
       <Route path="/fight" element={<Fight/>} />
      </Routes>
      </PokemonController>
+     </RandomController>
     </div>
   );
 }

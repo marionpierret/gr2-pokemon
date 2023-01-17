@@ -26,7 +26,7 @@ useEffect(()=>{
     fetchData()
 },[query])
 
-console.log(data)
+
     return(<>
         <SearchBar query={query} setQuery={setQuery} setDisplayDex={setDisplayDex}/>
      {displayDex && <PokeDex data={data} query={query} />}

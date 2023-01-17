@@ -1,9 +1,9 @@
 import { createContext, useState } from "react";
 
-export const PokemonContext = createContext();
+export const RandomContext = createContext();
 
-export const PokemonController = (props) => {
-  const [pokemon, setPokemon] = useState([
+export const RandomController = (props) => {
+  const [opponent, setOpponent] = useState([
     {
       name: "",
       id: "",
@@ -19,8 +19,8 @@ export const PokemonController = (props) => {
   
 
   return (
-    <PokemonContext.Provider value={[pokemon, setPokemon]}>
+    <RandomContext.Provider value={[opponent, setOpponent]}>
       {props.children}
-    </PokemonContext.Provider>
+    </RandomContext.Provider>
   );
 };

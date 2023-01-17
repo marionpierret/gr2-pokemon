@@ -1,0 +1,31 @@
+.card {
+    width: 170px;
+    height: 100px;
+    padding: 0.2rem;
+    background: rgba(198, 198, 198, 0.34);
+    border-radius: 8px;
+    backdrop-filter: blur(5px);
+    position: absolute;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.440);
+    border-left: 2px  rgba(255, 255, 255, 0.545) outset;
+    box-shadow: -40px 50px 30px rgba(0, 0, 0, 0.280);
+    transform: skewX(0deg);
+    transition: .4s;
+    overflow: hidden;
+    color: rgb(0, 0, 0);
+  }
+  
+  .card:hover {
+    height: 300px; 
+    width: 300px;
+    transform: skew(0deg);
+  }
+  
+  
+  
+  .card h4{
+    text-align: center;
+    margin: 1.3rem;
+    color: rgb(0, 0, 0);
+    text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
+  }

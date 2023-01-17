@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 const PokeDex = (props) => {
   const [pokemon, setPokemon] = useContext(PokemonContext)
   const [details, setDetails] = useState([]);
-  let navigate = useNavigate()
+  const navigate = useNavigate()
   const fetchDetails = async () => {
     try {
       const callData = await axios.get(
@@ -27,13 +27,18 @@ const PokeDex = (props) => {
 
 const addPokemon = () => {
   setPokemon((prevState) => ({
-    ...prevState,
-    name: props.data.name,
-      id: props.data.id,
-      stats : props.data.stats,
+    name: document.querySelector("#name-screen").innerHTML,
+    id: props.data.id,
+    hp: document.querySelector(".hp").innerHTML,
+    attack: document.querySelector(".attack").innerHTML,
+    defense: document.querySelector(".defense").innerHTML,
+    specialAttack: document.querySelector(".special-attack").innerHTML,
+    specialDefense: document.querySelector(".special-defense").innerHTML,
+    speed : document.querySelector(".speed").innerHTML
   }));
-  // navigate("/")
-  console.log(pokemon)
+  
+  pokemon.name && navigate("/fight")
+  
 }
 
   return (
@@ -99,12 +104,12 @@ const addPokemon = () => {
           <div className="upper-buttons-container">
             <div className="big-button"></div>
             <div className="white-squares-container3">
-              <div
+              <button
                     className="white-square3"
                     onClick={() => addPokemon()}
                   >
                     Select this Pokemon ?
-                  </div>
+                  </button>
                  
             </div>
           </div>
@@ -151,7 +156,7 @@ const addPokemon = () => {
             {props.data.stats && props.data.stats.map((e, i) => (
               <div key={i}>
                 <h3>{e.stat.name}:</h3>
-                <p>Value : {e.base_stat}</p>
+                <p className={e.stat.name}>{e.base_stat}</p>
                 {/* <p>Effort :{e.effort}</p> */}
               </div>
             ))}

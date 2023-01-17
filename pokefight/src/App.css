@@ -835,6 +835,51 @@ div.redorange { /* red and orange card background - FIRE TYPE */
 div.green { /* green card background - GRASS TYPE */
   background: linear-gradient(to bottom right, #aae5b7,#78cf8b,#4fb665,#319d49,#4fb665,#78cf8b);
 }
+div.normal{
+  background: linear-gradient(to bottom right, #A8A878,#6D6D4E);
+}
+div.fighting{
+  background: linear-gradient(to bottom right, #C03028,#7D1F1A);
+}
+div.flying{
+  background: linear-gradient(to bottom right, #A890F0,#6D5E9C);
+}
+div.poison{
+  background: linear-gradient(to bottom right, #A040A0,#682A68);
+}
+div.ground{
+  background: linear-gradient(to bottom right, #E0C068,#927D44);
+}
+div.rock{
+  background: linear-gradient(to bottom right, #B8A038,#786824);
+}
+div.bug{
+  background: linear-gradient(to bottom right, #A8B820,#6D7815);
+}
+div.ghost{
+  background: linear-gradient(to bottom right, #705898,#493963);
+}
+div.steel{
+  background: linear-gradient(to bottom right, #B8B8D0,#787887);
+}
+div.psychic{
+  background: linear-gradient(to bottom right, #F85888,#A13959);
+}
+div.ice{
+  background: linear-gradient(to bottom right, #98D8D8,#638D8D);
+}
+div.dragon{
+  background: linear-gradient(to bottom right, #7038F8,#4924A1);
+}
+div.dark{
+  background: linear-gradient(to bottom right, #705848,#49392F);
+}
+div.fairy{
+  background: linear-gradient(to bottom right, #EE99AC,#9B6470);
+}
+div.shadow{
+  background: linear-gradient(to bottom right, #A8A878,#6D6D4E);
+}
 
 /* ----- Size and shape of cards, and gold round border
 SERVES AS "Border around name, image and info" */
@@ -879,13 +924,13 @@ SERVES AS "Border around name, image and info" */
 }
 
 /* ----- HP font styling */
-.hp {
-  color: crimson;
+/* .hp {
+  color: black;
   font-size: 18px;
   text-align: right;
   font-weight: 600;
   width: 50px;
-}
+} */
 
 /* ----- Type sign next to HP - OK to remove if replaced with image */
 .typesign {

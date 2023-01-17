@@ -4,8 +4,10 @@ import "./Home.css";
 import pokemonHome from "../Images/pokemonHome.png";
 import startTheGame from "../Images/startTheGame.png";
 import rules from "../Images/rules.png"
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate=useNavigate()
   return (
     <div className="home">
       <div className="logo">
@@ -22,17 +24,19 @@ const Home = () => {
           <img src={rules} alt="rules" style={{ height: "70px" }} />
         </div>
         <p>
-          Pick your pokemon and start the battle!
+          Pick your pokemon and play battles with randomly generated contestants!
         </p>
       </div> 
-      <Link to="/selectPokemon" className="start">
+      <div className="start">
         <img
           src={startTheGame}
           className="image-clignote"
           alt="startthegame"
           style={{ height: "70px" }}
+          onClick={() => navigate("/selectPokemon")}
         />
-      </Link>
+     
+      </div>
 </div>
      
       <div className='pokemonImg'>

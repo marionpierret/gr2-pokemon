@@ -10,14 +10,19 @@
     }
     
     .start{
-        display: flex;
-        align-self: center;
-        margin-left: 100px;
+        margin: auto;
     }
+
+    .align {
+        padding: 1rem;
+        gap: 5px;
+      }
 
     .centerhome{
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: space-between;
     height: 100px;
     margin-top: 50px;
     }
@@ -40,8 +45,6 @@
     
     
      .card {
-        display: flex;
-        align-self: start; 
         width: 170px;
         height: 100px;
         padding: 0.2rem;
@@ -59,17 +62,11 @@
       }
       
       .card:hover {
-        height: 150px;
+        height: 190px; 
+        width: 260px;
         transform: skew(0deg);
       }
       
-      .align {
-        padding: 1rem;
-        display: flex;
-        flex-direction: row;
-        gap: 5px;
-        align-self: flex-start;
-      }
       
       
       .card h1 {
