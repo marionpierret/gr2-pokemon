@@ -8,6 +8,8 @@ const Fight = () => {
     const [opponent, setOpponent] = useContext(RandomContext) 
     const [movePlayer, setMovePlayer] = useState([])
     const [moveOpponent, setMoveOpponent] = useState([])
+    const [slice, setSlice] = useState({ start: "0", end: "4" });
+    const [powerAttack, setPowerAttack] = useState("")
     const fetchMovePlayer = async () => {
         try {
           const callData = await axios.get(
@@ -34,14 +36,38 @@ const Fight = () => {
         fetchMoveOpponent();
       }, []);
 
-    console.log(movePlayer)
+      const fetchMoveDetails = async (url,attack) => {
+        try {
+            const callData = await axios.get(
+              `${url}`
+            );
+            setPowerAttack(callData.data.power);
+          } catch (err) {
+            console.log(err);
+          }
+
+          if(powerAttack === null){alert(`${attack} n'a pas fonctionné`)}
+          else(alert(`${attack} à retirer ${powerAttack} de pv`))
+
+          const random = Math.floor(Math.random() * (movePlayer.length))
+          console.log(random)
+          setSlice((prevState) => ({
+            ...prevState,
+            start: random,
+            end: random + 4,
+          }))
+        
+      }
+
+      console.log(powerAttack)
+    
     return(
         <div>
             <h1>Ready to fight</h1>
             <div className="arene">
             <div className="movePlayer">
-            {movePlayer.slice(0,4).map((e,i)=> 
-            <p>{e.move.name}</p>)}
+            {movePlayer.slice(slice.start,slice.end).map((e,i)=> 
+            <button onClick={() => fetchMoveDetails(e.move.url,e.move.name)}>{e.move.name}</button>)}
             </div>
 
             <div className="arene">
