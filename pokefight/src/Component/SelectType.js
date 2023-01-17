@@ -1,37 +1,56 @@
 import {useState,useEffect} from "react"
-import {useNavigate} from "react-router-dom"
 import axios from 'axios'
-import SearchBar from "./SearchBar"
+import { useNavigate } from "react-router"
 
-const SelectType = () => {
+
+const SelectType = (props) => {
 
 const navigate=useNavigate()
 const [species,setSpecies] = useState([])
 
-const fetchData = async () => {
+
+const fetchPokemonType = async (type) => {
     try {
       const callData = await axios.get(
         `https://pokeapi.co/api/v2/type/`
       );
       setSpecies(callData.data.results);
+
     } catch (err) {
       console.log(err);
     }
   };
 
 useEffect(()=>{
-    fetchData()
+  fetchPokemonType()
 },[])
 
-
-    return (
-      <>
-      <SearchBar/>
-           <br/>   
-          {species.map((e,i)=>
-          <button key={i} onClick={() => navigate(`/selectPokemon/${e.name}`)}>{e.name}</button>
-          )}
-          </>)
+    return (<>
+        <div className="logo">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
+          height="100%"
+          alt="logo"
+        />
+      </div>
+    <div className="displayType">
+    <h4>Select by Type :</h4>
+      <div className="white-squares-container2">
+        {species.map(
+          (e, i) =>
+            e.name !== "unknown" && (
+              <div
+                key={i}
+                className="white-square2"
+                onClick={() => navigate(`/selectPokemon/byType/${e.name}`)}
+              >
+                {e.name}
+              </div>
+            )
+        )}
+        </div>
+    </div>
+    </>)
 }
 
 export default SelectType

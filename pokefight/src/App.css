@@ -55,36 +55,10 @@
   transform: rotateY(180deg);
 }
 
-.App {
-  text-align: center;
-}
-
-.flip-card {
-  background-color: transparent;
-  width: 190px;
-  height: 254px;
-  perspective: 1000px;
-  font-family: sans-serif;
-}
-
-.title {
-  font-size: 1.5em;
-  font-weight: 900;
-  text-align: center;
-  margin: 0;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
+.displayType{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
 :root {
@@ -241,6 +215,8 @@ input {
   width: calc(228px * 2);
   display: flex;
   border-radius: 10px;
+  margin: auto;
+  margin-top: 20px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -580,6 +556,7 @@ input {
   grid-template-rows: 24% repeat(4, 19%);
   border-bottom: solid black 3px;
   border-bottom-right-radius: 10px;
+
 }
 #right-panel::before {
   content: '';
@@ -596,23 +573,27 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 100px;
 }
 .right-panel-screen {
   font-family: 'Press Start 2P', cursive;
-  width: 146px;
-  height: 64px;
+  width: 176px;
+  height: 200px;
   background-color: var(--secondary-screen-bg-color);
   border: solid black 2px;
   border-radius: 4px;
   font-size: xx-small;
   padding-left: 2px;
   padding-right: 2px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   align-items: center;
   justify-content: center;
   text-align: left;
   padding-left: 8px;
   line-height: 2;
+  gap:5px
 }
 
 /* square buttons grid */
@@ -671,8 +652,44 @@ input {
   justify-content: center;
 }
 
+.white-squares-container3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap : 5px;
+  margin-left: 5px;
+}
+.white-square3 {
+  text-align: center;
+  font-size: 9px;
+  font-weight: bold;
+  width: 80px;
+  height: 25px;
+  border-radius: 5px;
+  border: black 2px solid;
+  background-color: #ffffff;
+  box-shadow: inset -2px -2px gray;
+}
+
+.white-squares-container2 {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
 .white-square {
   width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  border: black 2px solid;
+  background-color: #ffffff;
+  box-shadow: inset -2px -2px gray;
+}
+.white-square2 {
+  text-align: center;
+  width: 60px;
   height: 25px;
   border-radius: 5px;
   border: black 2px solid;
@@ -720,6 +737,7 @@ input {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-top: 170px;
 }
 
 .bottom-screens-container .right-panel-screen {
@@ -745,15 +763,8 @@ input {
   background-repeat: no-repeat;
   background-size: contain;
 }
-.codepen {
-  background-image: url(https://blog.codepen.io/wp-content/uploads/2012/06/Button-Fill-Black-Large.png);
-}
-.github {
-  background-image: url(https://cdn-icons-png.flaticon.com/512/733/733609.png);
-}
-.dev {
-  background-image: url(https://raw.githubusercontent.com/gist/benhalpern/eff81b17359acafd17849146549b9291/raw/6de3cc24798bd3b133d4d89a1d87004c369eac46/dev-icon.svg);
-}
-.linkedin {
-  background-image: url(https://cdn-icons-png.flaticon.com/512/61/61109.png);
+
+.cardPoke{
+  display: flex;
+  flex-direction: row;
 }
