@@ -39,7 +39,7 @@ useEffect(()=>{
       <div className="white-squares-container2">
         {species.map(
           (e, i) =>
-            e.name !== "unknown" && (
+            e.name !== "unknown" && e.name !== "shadow" && (
               <div
                 key={i}
                 className="white-square2"

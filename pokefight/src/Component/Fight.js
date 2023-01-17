@@ -10,6 +10,7 @@ const Fight = () => {
     const [moveOpponent, setMoveOpponent] = useState([])
     const [slice, setSlice] = useState({ start: "0", end: "4" });
     const [powerAttack, setPowerAttack] = useState("")
+    const [loading, setLoading] = useState(false)
     const fetchMovePlayer = async () => {
         try {
           const callData = await axios.get(
@@ -42,15 +43,19 @@ const Fight = () => {
               `${url}`
             );
             setPowerAttack(callData.data.power);
+            setLoading(true)
           } catch (err) {
             console.log(err);
           }
 
-          if(powerAttack === null){alert(`${attack} n'a pas fonctionné`)}
+          console.log(powerAttack)
+            loading && powerAttack === null && alert(`${attack} n'a pas fonctionné`);
+            loading && powerAttack !== null && alert(`${attack} à retirer ${powerAttack} de pv`);
+          if(powerAttack === null){}
           else(alert(`${attack} à retirer ${powerAttack} de pv`))
 
           const random = Math.floor(Math.random() * (movePlayer.length))
-          console.log(random)
+   
           setSlice((prevState) => ({
             ...prevState,
             start: random,
@@ -59,7 +64,7 @@ const Fight = () => {
         
       }
 
-      console.log(powerAttack)
+    
     
     return(
         <div>
@@ -67,7 +72,9 @@ const Fight = () => {
             <div className="arene">
             <div className="movePlayer">
             {movePlayer.slice(slice.start,slice.end).map((e,i)=> 
-            <button onClick={() => fetchMoveDetails(e.move.url,e.move.name)}>{e.move.name}</button>)}
+            <button onClick={() => 
+          fetchMoveDetails(e.move.url,e.move.name)
+               }>{e.move.name}</button>)}
             </div>
 
             <div className="arene">
