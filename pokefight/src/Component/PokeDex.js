@@ -1,14 +1,19 @@
 import Stats from "./Stats";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useContext } from "react";
+import { PokemonContext } from "./PokemonContext";
+import { useNavigate } from "react-router";
+
 
 const PokeDex = (props) => {
-console.log(props.name)
+  const [pokemon, setPokemon] = useContext(PokemonContext)
   const [details, setDetails] = useState([]);
+  let navigate = useNavigate()
   const fetchDetails = async () => {
     try {
       const callData = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${props.id}`
+        `https://pokeapi.co/api/v2/pokemon/${props.data.id}`
       );
       setDetails(callData.stats);
     } catch (err) {
@@ -20,10 +25,21 @@ console.log(props.name)
     fetchDetails();
   }, []);
 
-console.log(props)
+const addPokemon = () => {
+  setPokemon((prevState) => ({
+    ...prevState,
+    name: props.data.name,
+      id: props.data.id,
+      stats : props.data.stats,
+  }));
+  // navigate("/")
+  console.log(pokemon)
+}
 
   return (
+    
     <>
+    {props.data &&
     <div id="pokedex">
       <div id="left-panel">
         <div className="left-top-container">
@@ -62,7 +78,7 @@ console.log(props)
             <div
               id="main-screen"
               style={{
-                backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.id}.png')`,
+                backgroundImage: `url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${props.data.id}.png')`,
               }}
             ></div>
             <div className="bottom-screen-lights">
@@ -83,18 +99,13 @@ console.log(props)
           <div className="upper-buttons-container">
             <div className="big-button"></div>
             <div className="white-squares-container3">
-              {/* <div
+              <div
                     className="white-square3"
-                    onClick={() => count > 1 && setCount(count - 1)}
+                    onClick={() => addPokemon()}
                   >
-                    Previous Pokemon
+                    Select this Pokemon ?
                   </div>
-                  <div
-                    className="white-square3"
-                    onClick={() => count < 1 && setCount(count + 1)}
-                  >
-                    Next Pokemon
-                  </div> */}
+                 
             </div>
           </div>
           <div className="nav-buttons-container">
@@ -103,7 +114,7 @@ console.log(props)
               <div>.</div>
             </div>
             <div className="green-screen">
-              <span id="name-screen">{props.name}</span>
+              <span id="name-screen">{props.data.name}</span>
             </div>
             <div className="right-nav-container">
               <div className="bottom-right-nav-container">
@@ -137,23 +148,24 @@ console.log(props)
 
         <div className="top-screen-container">
           <div id="about-screen" className="right-panel-screen">
-            {props.stats && props.stats.map((e, i) => (
+            {props.data.stats && props.data.stats.map((e, i) => (
               <div key={i}>
                 <h3>{e.stat.name}:</h3>
                 <p>Value : {e.base_stat}</p>
-                <p>Effort :{e.effort}</p>
+                {/* <p>Effort :{e.effort}</p> */}
               </div>
             ))}
           </div>
         </div>
         <div className="bottom-screens-container">
-          <div id="type-screen" className="right-panel-screen">{props.type && props.type.map((e,i)=> i<1 && e.type.name)}</div>
+          <div id="type-screen" className="right-panel-screen">{props.data.types && props.data.types.map((e,i)=> i<1 && e.type.name)}</div>
           <div id="id-screen" className="right-panel-screen">
-            {`#${props.id}`}
+            {`#${props.data.id}`}
           </div>
         </div>
       </div>
     </div>
+}
     </>
   );
 };

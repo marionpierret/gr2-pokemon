@@ -15,7 +15,7 @@ const fetchData = async () => {
           `https://pokeapi.co/api/v2/pokemon/${query}`
         );
         setData(callData.data);
-  
+        setDisplayDex(true)
       } catch (err) {
         console.log(err);
       }
@@ -29,7 +29,7 @@ useEffect(()=>{
 console.log(data)
     return(<>
         <SearchBar query={query} setQuery={setQuery} setDisplayDex={setDisplayDex}/>
-     {data.length>0 && <PokeDex data={data.data} query={query} type={data.types}/>}
+     {displayDex && <PokeDex data={data} query={query} />}
         
     </>)
 }

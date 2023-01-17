@@ -2,6 +2,7 @@ import {useParams} from "react-router-dom"
 import {useState,useEffect} from "react"
 import axios from 'axios'
 import PokeDex from "./PokeDex"
+import Card from "./Card"
 
 const ListByType = () => {
 
@@ -62,6 +63,7 @@ const ListByType = () => {
     };
   
     const fetchDataDetails = async (id) => {
+      console.log(id)
       try {
           const callData = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${id}`
@@ -73,31 +75,35 @@ const ListByType = () => {
         }
       };
    
-      console.log(data)
+      console.log(data.name)
 
     return (
-    <div>
+    <div className="listByType">
     <div className="cardPoke">
     <button onClick={()=> changeSliceMoins()}>-</button>
     {listByType.slice(slice.start,slice.end).map((e,i) =>
     <>
+    
     <div key={i} className="flip-card" onClick={() => setDisplayPokedex(!displayPokedex) & fetchDataDetails(e.pokemon.url.substr(34, e.pokemon.url.length).replace("/",""))}>
-    <div className="flip-card-inner">
+    {/* <div className="flip-card-inner">
         <div className="flip-card-front">
             <p className="title">{e.pokemon.name}</p>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}.png`} alt="logoPokemon"
               
             /> 
            
-        </div>
+        </div> */}
+        <Card name={e.pokemon.name} id={e.pokemon.url.substr(34, e.pokemon.url.length).replace("/","")}/>
     </div>
-    </div>
+  
     
     </>
     )}
     <button  onClick={()=> changeSlicePlus()}>+</button>
-    {displayPokedex && <PokeDex data={data.data} type={data.types}/>}
+   
     </div>
+    {data.name && <div><PokeDex data={data}/></div>}
+ 
     </div>
     
     

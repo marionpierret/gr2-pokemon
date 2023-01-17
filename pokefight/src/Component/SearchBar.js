@@ -37,7 +37,7 @@ const SearchBar = (props) => {
         <div
           id="search-btn"
           className="ball-container"
-          onClick={() => props.setQuery(input)}
+          onClick={() => props.setQuery(input.toLowerCase())}
         >
           <div className="upper-half-ball"></div>
           <div className="bottom-half-ball"></div>
