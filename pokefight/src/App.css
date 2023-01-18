@@ -1,16 +1,20 @@
-@import url('https://fonts.cdnfonts.com/css/pokemon-solid');
+@import url("https://fonts.cdnfonts.com/css/pokemon-solid");
 
-*{font-family: 'Pokemon Solid' , sans-serif;}
-*{letter-spacing: 1.5px;}
+* {
+  font-family: "Pokemon Solid", sans-serif;
+}
+* {
+  letter-spacing: 1.5px;
+}
 
 .flip-card {
   background-color: transparent;
-  width:290px;
+  width: 290px;
   height: 154px;
   font-family: sans-serif;
 }
 
-.pokeCard{
+.pokeCard {
   width: 100px;
 }
 
@@ -34,8 +38,9 @@
   transform: rotateY(180deg);
 }
 
-.flip-card-front, .flip-card-back {
-  box-shadow: 0 8px 14px 0 rgba(0,0,0,0.2);
+.flip-card-front,
+.flip-card-back {
+  box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -49,19 +54,29 @@
 }
 
 .flip-card-front {
-  background: linear-gradient(120deg, bisque 60%, rgb(255, 231, 222) 88%,
-     rgb(255, 211, 195) 40%, rgba(255, 127, 80, 0.603) 48%);
+  background: linear-gradient(
+    120deg,
+    bisque 60%,
+    rgb(255, 231, 222) 88%,
+    rgb(255, 211, 195) 40%,
+    rgba(255, 127, 80, 0.603) 48%
+  );
   color: coral;
 }
 
 .flip-card-back {
-  background: linear-gradient(120deg, rgb(255, 174, 145) 30%, coral 88%,
-     bisque 40%, rgb(255, 185, 160) 78%);
+  background: linear-gradient(
+    120deg,
+    rgb(255, 174, 145) 30%,
+    coral 88%,
+    bisque 40%,
+    rgb(255, 185, 160) 78%
+  );
   color: white;
   transform: rotateY(180deg);
 }
 
-.displayType{
+.displayType {
   display: flex;
   justify-content: center;
   margin-top: 20px;
@@ -424,7 +439,7 @@ input {
 
 #name-screen {
   width: 100%;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   text-align: center;
   font-size: 12.5px;
   overflow-wrap: break-word;
@@ -562,10 +577,9 @@ input {
   grid-template-rows: 24% repeat(4, 19%);
   border-bottom: solid black 3px;
   border-bottom-right-radius: 10px;
-
 }
 #right-panel::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -3px;
   bottom: 0;
@@ -582,7 +596,7 @@ input {
   margin-top: 100px;
 }
 .right-panel-screen {
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
   width: 176px;
   height: 200px;
   background-color: var(--secondary-screen-bg-color);
@@ -599,7 +613,7 @@ input {
   text-align: left;
   padding-left: 8px;
   line-height: 2;
-  gap:5px
+  gap: 5px;
 }
 
 /* square buttons grid */
@@ -662,14 +676,14 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap : 5px;
+  gap: 5px;
   margin-left: 5px;
 }
 .white-square3 {
   text-align: center;
   font-size: 9px;
   font-weight: bold;
-  width:150px;
+  width: 150px;
   height: 25px;
   border-radius: 5px;
   border: black 2px solid;
@@ -770,18 +784,17 @@ input {
   background-size: contain;
 }
 
-.cardPoke{
+.cardPoke {
   display: flex;
   flex-direction: row;
   height: 310px;
   margin-bottom: 30px;
 }
 
-.listByType{
+.listByType {
   display: flex;
   flex-direction: column;
 }
-
 
 /* CardPokemon */
 
@@ -795,12 +808,9 @@ NOTES
 5. Updated the card sizes after some feedback on the Udacity slack and forums - mah pictures were too big!
 */
 
-
 /* OVERALL LOOK AND FEEL */
 
 /* ----- Background of entire page */
-
-
 
 /* 
 Use this to test positioning of tables and text. 
@@ -813,72 +823,105 @@ table, td, tr {
 }
 */
 
-
 /* ----- Arrange card table */
 .organizecardsB {
- width: 10px;
- height: 50px;
+  width: 10px;
+  height: 50px;
 }
-
-
 
 /* ----- Backgrounds of different card types */
-div.blue { /* blue card background - WATER TYPE */
-  background: linear-gradient(to bottom right, #d9e4ec,#adc1d1,#7d99af,#557792,#7d99af,#adc1d1);
+div.blue {
+  /* blue card background - WATER TYPE */
+  background: linear-gradient(
+    to bottom right,
+    #d9e4ec,
+    #adc1d1,
+    #7d99af,
+    #557792,
+    #7d99af,
+    #adc1d1
+  );
 }
-div.yellow { /* yellow card background - ELECTRIC TYPE */
-  background: linear-gradient(to bottom right, #ffffa4,#fff870,#fff200,#fff870,#ffffa4,#fff870);
+div.yellow {
+  /* yellow card background - ELECTRIC TYPE */
+  background: linear-gradient(
+    to bottom right,
+    #ffffa4,
+    #fff870,
+    #fff200,
+    #fff870,
+    #ffffa4,
+    #fff870
+  );
 }
-div.redorange { /* red and orange card background - FIRE TYPE */
-  background: linear-gradient(to bottom right, #ffbfba,#ff978f,#ff756b,#ff594c,#ff756b,#ff978f);
+div.redorange {
+  /* red and orange card background - FIRE TYPE */
+  background: linear-gradient(
+    to bottom right,
+    #ffbfba,
+    #ff978f,
+    #ff756b,
+    #ff594c,
+    #ff756b,
+    #ff978f
+  );
 }
-div.green { /* green card background - GRASS TYPE */
-  background: linear-gradient(to bottom right, #aae5b7,#78cf8b,#4fb665,#319d49,#4fb665,#78cf8b);
+div.green {
+  /* green card background - GRASS TYPE */
+  background: linear-gradient(
+    to bottom right,
+    #aae5b7,
+    #78cf8b,
+    #4fb665,
+    #319d49,
+    #4fb665,
+    #78cf8b
+  );
 }
-div.normal{
-  background: linear-gradient(to bottom right, #A8A878,#6D6D4E);
+div.normal {
+  background: linear-gradient(to bottom right, #a8a878, #6d6d4e);
 }
-div.fighting{
-  background: linear-gradient(to bottom right, #C03028,#7D1F1A);
+div.fighting {
+  background: linear-gradient(to bottom right, #c03028, #7d1f1a);
 }
-div.flying{
-  background: linear-gradient(to bottom right, #A890F0,#6D5E9C);
+div.flying {
+  background: linear-gradient(to bottom right, #a890f0, #6d5e9c);
 }
-div.poison{
-  background: linear-gradient(to bottom right, #A040A0,#682A68);
+div.poison {
+  background: linear-gradient(to bottom right, #a040a0, #682a68);
 }
-div.ground{
-  background: linear-gradient(to bottom right, #E0C068,#927D44);
+div.ground {
+  background: linear-gradient(to bottom right, #e0c068, #927d44);
 }
-div.rock{
-  background: linear-gradient(to bottom right, #B8A038,#786824);
+div.rock {
+  background: linear-gradient(to bottom right, #b8a038, #786824);
 }
-div.bug{
-  background: linear-gradient(to bottom right, #A8B820,#6D7815);
+div.bug {
+  background: linear-gradient(to bottom right, #a8b820, #6d7815);
 }
-div.ghost{
-  background: linear-gradient(to bottom right, #705898,#493963);
+div.ghost {
+  background: linear-gradient(to bottom right, #705898, #493963);
 }
-div.steel{
-  background: linear-gradient(to bottom right, #B8B8D0,#787887);
+div.steel {
+  background: linear-gradient(to bottom right, #b8b8d0, #787887);
 }
-div.psychic{
-  background: linear-gradient(to bottom right, #F85888,#A13959);
+div.psychic {
+  background: linear-gradient(to bottom right, #f85888, #a13959);
 }
-div.ice{
-  background: linear-gradient(to bottom right, #98D8D8,#638D8D);
+div.ice {
+  background: linear-gradient(to bottom right, #98d8d8, #638d8d);
 }
-div.dragon{
-  background: linear-gradient(to bottom right, #7038F8,#4924A1);
+div.dragon {
+  background: linear-gradient(to bottom right, #7038f8, #4924a1);
 }
-div.dark{
-  background: linear-gradient(to bottom right, #705848,#49392F);
+div.dark {
+  background: linear-gradient(to bottom right, #705848, #49392f);
 }
-div.fairy{
-  background: linear-gradient(to bottom right, #EE99AC,#9B6470);
+div.fairy {
+  background: linear-gradient(to bottom right, #ee99ac, #9b6470);
 }
-div.shadow{
-  background: linear-gradient(to bottom right, #A8A878,#6D6D4E);
+div.shadow {
+  background: linear-gradient(to bottom right, #a8a878, #6d6d4e);
 }
 
 /* ----- Size and shape of cards, and gold round border
@@ -900,7 +943,9 @@ SERVES AS "Border around name, image and info" */
 }
 
 /* Forcing tables to the same full width */
-.nameheaders, .stats, .costs {
+.nameheaders,
+.stats,
+.costs {
   width: 310px;
   vertical-align: center;
 }
@@ -960,7 +1005,7 @@ this is DIRECTLY UNDER THE IMAGE */
   width: 150px; /* DO NOT REMOVE, HEATHER! */
   padding: 2px 2px 2px 2px;
   margin: 0px 0px 20px 30px;
-  background: linear-gradient(to right, goldenrod,yellow,goldenrod);
+  background: linear-gradient(to right, goldenrod, yellow, goldenrod);
   font-size: 10px;
   font-style: italic;
   font-weight: 600;
@@ -1038,7 +1083,8 @@ This is an extra class for those only */
 }
 
 /* Comply with requirements by having no bullets */
-ul, li {
+ul,
+li {
   list-style: none;
   padding: 0px;
   margin: 0px;
@@ -1094,25 +1140,77 @@ Code immediately below is public domain and allows for my work to show as intend
    License: none (public domain)
 */
 
-
-
-
-
-
-
 ol {
-	list-style: none;
+  list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+  quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
+
+#progressbar {
+  width: 250px;
+  background-color: white;
+  border: 1px solid black;
+  height: 35px;
+}
+#progressbar-opponent {
+  width: 250px;
+  background-color: white;
+  border: 1px solid black;
+  height: 35px;
+}
+#indicator {
+  width: 100%;
+  background-color: #319d49;
+  height: 35px;
+  margin: 0px;
+}
+#indicator-opponent {
+  width: 100%;
+  background-color: #319d49;
+  height: 35px;
+  margin: 0px;
+}
+
+#progressnum {
+  position: absolute;
+  text-align: center;
+  width: 250px;
+}
+#progressnum-opponent {
+  position: absolute;
+  text-align: center;
+  width: 250px;
+}
+.arene {
+  display: flex;
+  flex-direction: row;
+}
+
+.lifeBar {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.moveOpponent{
+  display: flex;
+  flex-direction: column;
+  
+  margin: 4px 0px 0px 0px;
+
+}
+
 

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router";
 const PokeDex = (props) => {
   const [pokemon, setPokemon] = useContext(PokemonContext)
   const [details, setDetails] = useState([]);
+  const [level, setLevel] = useState([])
   const navigate = useNavigate()
   const fetchDetails = async () => {
     try {
@@ -21,8 +22,21 @@ const PokeDex = (props) => {
     }
   };
 
+  const fetchPokemonLevel = async () => {
+    try {
+      const callData = await axios.get(
+        `https://pokeapi.co/api/v2/evolution-chain/${props.data.id}/`
+      )
+      .then((res) => {console.log(res.data.chain.evolves_to[0])})
+      console.log(props.data.id)
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     fetchDetails();
+    fetchPokemonLevel()
   }, []);
 
 const addPokemon = () => {

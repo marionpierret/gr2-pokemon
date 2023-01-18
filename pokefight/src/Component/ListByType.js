@@ -25,6 +25,8 @@ const ListByType = () => {
         }
       };
 
+      console.log(data)
+
     
     useEffect(()=>{
         fetchData()

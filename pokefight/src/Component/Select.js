@@ -44,11 +44,11 @@ const Select = () => {
     
     return(
 
-    <div>
+    <div className='selectDiv'>
          <div className="logo">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
-          height="100%"
+          height="150%"
           alt="logo"
         />
       </div>
@@ -60,8 +60,8 @@ const Select = () => {
         </div>
 
       
-      <div className="card">
-        <div className="align">
+      <div className="card2">
+        <div className="align2">
           <h4>Your opponent is...</h4>
         </div>
         <div>
