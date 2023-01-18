@@ -22,6 +22,7 @@ const Fight = () => {
   const [viePlayer,setViePlayer] = useState(pokemon.hp)
   const [vieOpponent,setVieOpponent] = useState(opponent.stats[0].base_stat)
   const [loadingAttack, setLoadingAttack] = useState(false)
+  const [urlAndName, setUrlAndName] = useState({name : "" , url : ""})
  
   const fetchMovePlayer = async () => {
     try {
@@ -44,13 +45,15 @@ const Fight = () => {
     }
   };
 
+console.log(loading)
+console.log(viePlayer)
+console.log(urlAndName.url)
 
-
-  const fetchMoveDetails = async (url, attack) => {
+  const fetchMoveDetails = async () => {
     try {
-      const callData = await axios.get(`${url}`);
+      const callData = await axios.get(`${urlAndName.src}`);
       setPowerAttack(callData.data.power);
-      setNameAttack(attack);
+      setNameAttack(urlAndName.name);
       setLoading(true);
     } catch (err) {
       console.log(err);
@@ -137,23 +140,34 @@ const Fight = () => {
       }
       };
 
-  const attack = async (event, url,name) => {
-    event.preventDefault()
-    let promise = await Promise.all([
-      await fetchMoveDetails(url, name),
-      await confirmAttack(),
-       fetchMoveOpponentDetails(),
-       confirmOpponentAttack(),
-       checkDeath(),
-       setVieOpponent(vieOpponent - degats)
-    ]).then((resp) => console.log(resp))
-    return promise
-  }
+  // const attack = async (event, url,name) => {
+  //   event.preventDefault()
+  //   let promise = await Promise.all([
+  //     await fetchMoveDetails(url, name),
+  //     await confirmAttack(),
+  //      fetchMoveOpponentDetails(),
+  //      confirmOpponentAttack(),
+  //      checkDeath(),
+  //      setVieOpponent(vieOpponent - degats)
+  //   ]).then((resp) => console.log(resp))
+  //   return promise
+  // }
 
   useEffect(() => {
     fetchMovePlayer();
     fetchMoveOpponent();
   }, []);
+
+    useEffect(() => {
+      urlAndName.name !== "" &&
+      fetchMoveDetails();
+     confirmAttack();
+       fetchMoveOpponentDetails();
+       confirmOpponentAttack();
+       checkDeath();
+  }, [urlAndName]);
+
+
 
   return (
     <div>
@@ -185,9 +199,12 @@ const Fight = () => {
             <div className="sectionAttack">
               <div className="Attack">
                 <button
-                  onClick={(event) => 
-                    
-                   debounce(attack(event,e.move.url,e.move.name), 300)
+                  onClick={() => 
+                    setUrlAndName((prevState) => ({
+          name: e.move.name,
+          src: e.move.url,
+        }))
+                  //  debounce(attack(event,e.move.url,e.move.name), 300)
                   }
                 >
                   {e.move.name}
