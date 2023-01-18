@@ -79,7 +79,13 @@
 .displayType {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+  margin-top: 50px;
+}
+.displayType h4{
+  margin: 20px
 }
 
 :root {
@@ -697,6 +703,14 @@ input {
   justify-content: center;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
+  border: 3px black solid;
+  border-radius: 13px;
+  margin: 10px;
+  padding: 20px;
+  box-shadow:
+  0 0 0 10px hsl(0, 0%, 80%),
+  0 0 0 15px hsl(0, 0%, 90%);
+  background-color: #2b73b9
 }
 
 .white-square {
@@ -704,17 +718,51 @@ input {
   height: 25px;
   border-radius: 5px;
   border: black 2px solid;
-  background-color: #ffffff;
+  background-color: #ffcb05;
   box-shadow: inset -2px -2px gray;
 }
 .white-square2 {
   text-align: center;
-  width: 60px;
+  width: 80px;
   height: 25px;
   border-radius: 5px;
   border: black 2px solid;
-  background-color: #ffffff;
+  background-color: #ffcb05;
   box-shadow: inset -2px -2px gray;
+  margin: 5px 5px
+}
+
+.selectType{
+  max-width: 40em;               /* largeur de la fenêtre */
+  /* height: 50px; */
+  margin: 1em auto 2em;
+  border-radius: 5px;
+  border: 2px solid black;
+  overflow: hidden;                     /* masque tout ce qui dépasse */
+  /* box-shadow: 0 .25em .5em rgb(24, 24, 24),inset 0 0 1em .25em #CCC; */
+  box-shadow:
+  0 0 0 10px hsl(0, 0%, 80%),
+  0 0 0 15px hsl(0, 0%, 90%);
+  color: #2b73b9;
+  font-size: 20px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.selectType > :first-child{
+  display: inline-block;                /* modèle de boîte en ligne */
+  padding-right: 2em;                   /* un peu d'espace pour la transition */
+  padding-left: 100%;                   /* placement à droite du conteneur */
+  white-space: nowrap;                  /* pas de passage à la ligne */
+  animation: defilement-rtl 4s infinite linear;
+}
+
+@keyframes defilement-rtl {
+  0% {
+    transform: translate3d(0,0,0);      /* position initiale à droite */
+  }
+  100% {
+    transform: translate3d(-100%,0,0);  /* position finale à gauche */
+  }
 }
 
 .center-right-container {

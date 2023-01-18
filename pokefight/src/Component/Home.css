@@ -1,16 +1,23 @@
 
 .home{
-    display: flex;
-    flex-direction: column;
+  height: 55rem;
+  width: 80rem;
+  display: flex;
+  flex-direction: column;
+  background-image: url(../Images/bgImg.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position-y: 100%;
     }
     
     .logo{
-        height: 100px;
+      margin-top: 50px;
+      height: 100px;
     
     }
     
     .start{
-        margin: auto;
+      margin-left: 440px
     }
 
     .align {
@@ -75,3 +82,39 @@
         color: rgb(0, 0, 0);
         text-shadow: -10px 5px 10px rgba(0, 0, 0, 0.573);
       }
+
+      /* le block conteneur */
+.textdefilant {
+  max-width: auto; /* largeur de la fenêtre */
+  /* margin: 1em auto 2em; */
+  border: 8px solid #ffcb05;
+  overflow: hidden; /* masque tout ce qui dépasse */
+  box-shadow: 0 0.25em 0.5em #ccc, inset 0 0 1em 0.25em #ccc;
+  margin-bottom: 1rem;
+}
+
+/* le bloc défilant */
+.textdefilant > :first-child {
+  display: inline-block; /* modèle de boîte en ligne */
+  padding-right: 2em; /* un peu d'espace pour la transition */
+  padding-left: 100%; /* placement à droite du conteneur */
+  white-space: nowrap; /* pas de passage à la ligne */
+  animation: defilement-rtl 80s infinite linear;
+  /* color: #395faa */
+  
+}
+
+@keyframes defilement-rtl {
+  0% {
+    transform: translate3d(0, 0, 0); /* position initiale à droite */
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0); /* position finale à gauche */
+  }
+}
+
+.footer {
+  margin-top: 330px;
+  margin-right: 0px;
+  margin-left: 200px
+}

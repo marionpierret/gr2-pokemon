@@ -5,7 +5,6 @@ import ListByType from "./Component/ListByType"
 import { Route, Routes } from 'react-router';
 import Select from './Component/Select';
 import SelectType from './Component/SelectType';
-import NavBar from './Component/NavBar';
 import Fight from './Component/Fight';
 import {PokemonController} from "./Component/PokemonContext"
 import {RandomController} from "./Component/RandomContext"
@@ -15,7 +14,6 @@ const App = () => {
     <div className="App">
       <RandomController>
       <PokemonController>
-      <NavBar/>
      <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/selectPokemon" element={<Select/>} />

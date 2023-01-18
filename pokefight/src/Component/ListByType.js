@@ -3,6 +3,7 @@ import {useState,useEffect} from "react"
 import axios from 'axios'
 import PokeDex from "./PokeDex"
 import Card from "./Card"
+import NavBar from "./NavBar"
 
 const ListByType = () => {
 
@@ -81,6 +82,7 @@ const ListByType = () => {
 
     return (
     <div className="listByType">
+      <NavBar/>
     <div className="cardPoke">
     <button onClick={()=> changeSliceMoins()}>-</button>
     {listByType.slice(slice.start,slice.end).map((e,i) =>

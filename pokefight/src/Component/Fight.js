@@ -2,6 +2,8 @@ import { useContext, useState, useEffect } from "react";
 import { PokemonContext } from "./PokemonContext";
 import { RandomContext } from "./RandomContext";
 import axios from "axios";
+import NavBar from "./NavBar";
+import debounce from 'lodash.debounce'
 
 const Fight = () => {
   const [pokemon, setPokemon] = useContext(PokemonContext);
@@ -18,8 +20,9 @@ const Fight = () => {
   const [degats, setDegats] = useState(0)
   const [degatsOpponent, setDegatsOpponent] = useState(0)
   const [viePlayer,setViePlayer] = useState(pokemon.hp)
-  // const [vieOpponent,setVieOpponent] = useState(opponent.stats[0].base_stat)
-
+  const [vieOpponent,setVieOpponent] = useState(opponent.stats[0].base_stat)
+  const [loadingAttack, setLoadingAttack] = useState(false)
+ 
   const fetchMovePlayer = async () => {
     try {
       const callData = await axios.get(
@@ -41,10 +44,7 @@ const Fight = () => {
     }
   };
 
-  useEffect(() => {
-    fetchMovePlayer();
-    fetchMoveOpponent();
-  }, []);
+
 
   const fetchMoveDetails = async (url, attack) => {
     try {
@@ -68,140 +68,96 @@ const Fight = () => {
     }
   };
 
-  const confirmOpponentAttack = () => {
+  const confirmOpponentAttack = async () => {
     let coeffMultiplicateur = Math.random() * (1 - 0.85) + 0.85;
-    setDegatsOpponent(Math.ceil(((((opponent.stats[4].base_stat*0.4+2)*opponent.stats[3].base_stat*opponentPowerAttack)/(opponent.stats[2].base_stat)/50)+2)*coeffMultiplicateur))
-    // let playerPvinit = pokemon.hp
-    let actualprogress = parseInt(
-      document.querySelector("#progressnum").innerHTML.replace("PV", "")
-    );
-    let indicator = document.querySelector("#indicator");
-
+    await setDegatsOpponent(Math.ceil(((((opponent.stats[4].base_stat*0.4+2)*opponent.stats[3].base_stat*opponentPowerAttack)/(opponent.stats[2].base_stat)/50)+2)*coeffMultiplicateur))
     if (opponentPowerAttack === null) {
       return;
     }
-    else if (opponentPowerAttack > 0) {
-      let newActualprogress = actualprogress - degatsOpponent;
-      setViePlayer(actualprogress - degatsOpponent)
-        indicator.style.width = `${(newActualprogress * 100)/pokemon.hp}%`;
-        document.querySelector("#progressnum").innerHTML = `${Math.floor(
-          newActualprogress
-        )} PV`
-
+    else if(viePlayer > 0) {
+      await setViePlayer(viePlayer - degatsOpponent)
     }
-    if (actualprogress <= 0) {
-      indicator.style.width = `${0}%`;
-      document.querySelector("#progressnum").innerHTML = `${0} PV`
-    }  
+    else if(viePlayer <= 0) {
+      await setViePlayer(0)
+    }
 
   }
 
-  // const displayOpponentAttack = () =>{
+  const changeLife = async (vieOpponent, degats) => {
+    await setVieOpponent(vieOpponent - degats)
+    setLoadingAttack(true)
+   }
 
-  // }
-
-
-
-  const confirmAttack = () => {
+  const confirmAttack = async () => {
+  
     let coeffMultiplicateur = Math.random() * (1 - 0.85) + 0.85;
-  setDegats(Math.ceil(((((pokemon.specialDefense*0.4+2)*pokemon.specialAttack*powerAttack)/(pokemon.defense)/50)+2)*coeffMultiplicateur))
-   let opponentPvinit = opponent.stats[0].base_stat
-    let actualprogress = parseInt(
-      document
-        .querySelector("#progressnum-opponent")
-        .innerHTML.replace("PV", "")
-    ); 
-    let indicator = document.querySelector("#indicator-opponent");
-
+   setDegats(Math.ceil(((((pokemon.specialDefense*0.4+2)*pokemon.specialAttack*powerAttack)/(pokemon.defense)/50)+2)*coeffMultiplicateur))
+  
     if (powerAttack === null) {
       const random = Math.floor(Math.random() * movePlayer.length);
-      setSlice((prevState) => ({
+    await  setSlice((prevState) => ({
         ...prevState,
         start: random,
         end: random + 4,
-      }));
+      }), slice);
       return
     }
-    else if (powerAttack > 0) {
-      let newActualprogress = actualprogress - degats;
-      indicator.style.width = `${(newActualprogress * 100)/opponentPvinit}%`;
-      document.querySelector(
-        "#progressnum-opponent"
-      ).innerHTML = `${Math.floor(newActualprogress)} PV`;
-     
-      }
-        if (actualprogress <= 0) {
-      indicator.style.width = `${0}%`;
-      document.querySelector("#progressnum-opponent").innerHTML = `${0} PV`
-    } 
+    else if (vieOpponent - degats > 0) {
+    await changeLife(vieOpponent, degats)
+    console.log(vieOpponent)
+
     const random = Math.floor(Math.random() * movePlayer.length);
 
-    setSlice((prevState) => ({
+    await setSlice((prevState) => ({
       ...prevState,
       start: random,
       end: random + 4,
     }));
-  };
 
-  // const displayAttack = () => {
-  //   let opponentPvinit = opponent.stats[0].base_stat
-  //   let actualprogress = parseInt(
-  //     document
-  //       .querySelector("#progressnum-opponent")
-  //       .innerHTML.replace("PV", "")
-  //   ); 
-  //   let indicator = document.querySelector("#indicator-opponent");
-  //   if (powerAttack === null) {
-  //     const random = Math.floor(Math.random() * movePlayer.length);
-  //     setSlice((prevState) => ({
-  //       ...prevState,
-  //       start: random,
-  //       end: random + 4,
-  //     }));
-  //     return
-  //   }
-  //   else if (powerAttack > 0) {
-  //     let newActualprogress = actualprogress - degats;
-  //     indicator.style.width = `${(newActualprogress * 100)/opponentPvinit}%`;
-  //     document.querySelector(
-  //       "#progressnum-opponent"
-  //     ).innerHTML = `${Math.floor(newActualprogress)} PV`;
-     
-  //     }
-  //       if (actualprogress <= 0) {
-  //     indicator.style.width = `${0}%`;
-  //     document.querySelector("#progressnum-opponent").innerHTML = `${0} PV`
-  //   } 
-  // }
+  }
+  else if (vieOpponent - degats <= 0) {
+    await setVieOpponent(0);
+  }
 
-  const checkDeath = () => {
-    let opponentLife = parseInt(
-      document
-        .querySelector("#progressnum-opponent")
-        .innerHTML.replace("PV", "")
-    );
-    let playerLife = parseInt(
-      document.querySelector("#progressnum").innerHTML.replace("PV", "")
-    );
-      if(opponentLife <= 0){
+  }
+  const checkDeath = async () => {
+      if(vieOpponent <= 0){
         setWinner((prevState) => ({
           ...prevState,
           name: pokemon.name,
           src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
         }))
       }
-      else if(playerLife <= 0){
+      else if(viePlayer <= 0){
         setWinner((prevState) => ({
           ...prevState,
           name: opponent.name,
           src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${opponent.id}.png`,
         }))
       }
-      setLoading(false)
-  };
+      };
+
+  const attack = async (event, url,name) => {
+    event.preventDefault()
+    let promise = await Promise.all([
+      await fetchMoveDetails(url, name),
+      await confirmAttack(),
+       fetchMoveOpponentDetails(),
+       confirmOpponentAttack(),
+       checkDeath(),
+       setVieOpponent(vieOpponent - degats)
+    ]).then((resp) => console.log(resp))
+    return promise
+  }
+
+  useEffect(() => {
+    fetchMovePlayer();
+    fetchMoveOpponent();
+  }, []);
 
   return (
     <div>
+      <NavBar/>
       <h1>Ready to fight</h1>
       
       
@@ -209,20 +165,17 @@ const Fight = () => {
       <>
       <div className="lifeBar">
         <div id="pwidget">
-          <div id="progressnum">{pokemon && `${pokemon.hp} PV`}</div>
+          <div id="progressnum">{`${viePlayer} PV`}</div>
           <div id="progressbar">
-            <div id="indicator"></div>
+            <div id="indicator" width = {viePlayer >0 ? `${(viePlayer * 100)/pokemon.hp}%` : `0%`}></div>
           </div>
         </div>
         <div id="pwidget-opponent">
           <div id="progressnum-opponent">
-            {opponent &&
-              opponent.stats.map(
-                (e, i) => e.stat.name === "hp" && `${e.base_stat} PV`
-              )}
+            {`${vieOpponent } PV`}
           </div>
           <div id="progressbar-opponent">
-            <div id="indicator-opponent"></div>
+            <div id="indicator-opponent" width={vieOpponent >0 ?`${(vieOpponent * 100)/opponent.stats[0].base_stat}%` : "0%"}></div>
           </div>
         </div>
       </div>
@@ -232,14 +185,9 @@ const Fight = () => {
             <div className="sectionAttack">
               <div className="Attack">
                 <button
-                  onClick={() =>
-                    Promise.all([
-                      fetchMoveDetails(e.move.url, e.move.name),
-                      confirmAttack(),
-                      fetchMoveOpponentDetails(),
-                      confirmOpponentAttack(),
-                      checkDeath()
-                    ]).then((resp) => console.log(resp))
+                  onClick={(event) => 
+                    
+                   debounce(attack(event,e.move.url,e.move.name), 300)
                   }
                 >
                   {e.move.name}
@@ -299,7 +247,7 @@ const Fight = () => {
             : ''} 
             l'attaque à retirer ${degatsOpponent} de PV`
           }`}
-          {loading && <button onClick={() => displayAttack()}>Ok?</button>}
+          {/* {loading && <button onClick={() => displayAttack()}>Ok?</button>} */}
       </div>
    
     </>

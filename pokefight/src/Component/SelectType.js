@@ -2,6 +2,7 @@ import {useState,useEffect} from "react"
 import axios from 'axios'
 import { useNavigate } from "react-router"
 import Card from "./Card"
+import NavBar from "./NavBar"
 
 
 const SelectType = (props) => {
@@ -27,15 +28,18 @@ useEffect(()=>{
 },[])
 
     return (<>
+    <NavBar/>
         <div className="logo">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
-          height="100%"
+          height="150%"
           alt="logo"
         />
       </div>
     <div className="displayType">
-    <h4>Select by Type :</h4>
+      <div className="selectType">
+    <h4>Select by Type </h4>
+    </div>
       <div className="white-squares-container2">
         {species.map(
           (e, i) =>

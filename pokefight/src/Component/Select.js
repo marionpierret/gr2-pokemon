@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css";
 import PokeDex from "./PokeDex";
+import NavBar from './NavBar'
 
 
 const Select = () => {
@@ -45,6 +46,7 @@ const Select = () => {
     return(
 
     <div className='selectDiv'>
+      <NavBar/>
          <div className="logo">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
