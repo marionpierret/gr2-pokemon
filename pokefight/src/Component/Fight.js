@@ -16,15 +16,32 @@ const Fight = () => {
   const [opponentNameAttack, setOpponentNameAttack] = useState("initial");
   const [nameAttack, setNameAttack] = useState("initial");
   const [winner, setWinner] = useState({ name: "", src: "" });
-  const [degats, setDegats] = useState(0);
-  const [degatsOpponent, setDegatsOpponent] = useState(0);
+  const [degats, setDegats] = useState(
+    Math.ceil(
+      Math.abs(
+        (parseInt(pokemon.attack) + parseInt(pokemon.specialAttack)) / 2 -
+          (opponent.stats[2].base_stat + opponent.stats[4].base_stat) / 2 / 2
+      ) *
+        (Math.random() * (1.15 - 0.85) + 0.85)
+    )
+  );
+  const [degatsOpponent, setDegatsOpponent] = useState(
+    Math.ceil(
+      Math.abs(
+        (opponent.stats[1].base_stat + opponent.stats[3].base_stat) / 2 -
+          (parseInt(pokemon.defense) + parseInt(pokemon.specialDefense)) / 2 / 2
+      ) *
+        (Math.random() * (1.15 - 0.85) + 0.85)
+    )
+  );
   const [viePlayer, setViePlayer] = useState(pokemon.hp);
   const [vieOpponent, setVieOpponent] = useState(opponent.stats[0].base_stat);
   const [loadingAttack, setLoadingAttack] = useState(false);
   const [loadingMove, setLoadingMove] = useState(false);
   const [urlAndName, setUrlAndName] = useState({ name: "", url: "" });
-  const [displayMove,setDisplayMove] = useState(true);
-  const [count,setCount] = useState(0)
+  const [displayMove, setDisplayMove] = useState(true);
+  const [count, setCount] = useState(1);
+  const [count1, setCount1] = useState(1);
 
   const fetchMovePlayer = async () => {
     try {
@@ -72,11 +89,24 @@ const Fight = () => {
     // let hisAttack1 = (opponent.stats[1].base_stat + opponent.stats[3].base_stat)/2
     // let hisAttack2 = ((parseInt(pokemon.defense) + parseInt(pokemon.specialDefense))/2)/2
     // let degatsSubis = Math.ceil((((opponent.stats[1].base_stat + opponent.stats[3].base_stat)/2) - (((parseInt(pokemon.defense) + parseInt(pokemon.specialDefense))/2)/2))*(Math.random() * (1.15 - 0.85) + 0.85))
-    await setDegatsOpponent(Math.ceil(Math.abs((((opponent.stats[1].base_stat + opponent.stats[3].base_stat)/2) - (((parseInt(pokemon.defense) + parseInt(pokemon.specialDefense))/2)/2)))*(Math.random() * (1.15 - 0.85) + 0.85)));
-   
-   if (viePlayer > 0) {
+    setCount1(Math.floor(Math.random() * 3));
+    count1 === 0
+      ? setDegatsOpponent(0)
+      : setDegatsOpponent(
+          Math.ceil(
+            Math.abs(
+              (opponent.stats[1].base_stat + opponent.stats[3].base_stat) / 2 -
+                (parseInt(pokemon.defense) + parseInt(pokemon.specialDefense)) /
+                  2 /
+                  2
+            ) *
+              (Math.random() * (1.15 - 0.85) + 0.85)
+          )
+        );
+
+    if (viePlayer - degatsOpponent > 0) {
       await setViePlayer(viePlayer - degatsOpponent);
-    } else if (viePlayer <= 0) {
+    } else if (viePlayer - degatsOpponent <= 0) {
       await setViePlayer(0);
     }
   };
@@ -85,20 +115,21 @@ const Fight = () => {
   //   await setVieOpponent(vieOpponent - degats);
   //   setLoadingAttack(true);
   // };
-console.log(degats)
-console.log(degatsOpponent)
-  const confirmAttack = async () => {
-    let cf = Math.random() * (1.15 - 0.85) + 0.85
-    let myAttack1 = (parseInt(pokemon.attack) + parseInt(pokemon.specialAttack))/2
-    // console.log(myAttack1)
-    let myAttack2 = ((opponent.stats[2].base_stat+opponent.stats[4].base_stat)/2)/2
-    // console.log(myAttack2)
-    let degatsInflige = Math.ceil((Math.abs(myAttack1-myAttack2))*cf)
-    setDegats(degatsInflige)
-    
 
-    console.log(degatsInflige)
-if (vieOpponent - degats > 0) {
+  const confirmAttack = async () => {
+    let cf = Math.random() * (1.15 - 0.85) + 0.85;
+    let myAttack1 =
+      (parseInt(pokemon.attack) + parseInt(pokemon.specialAttack)) / 2;
+    // console.log(myAttack1)
+    let myAttack2 =
+      (opponent.stats[2].base_stat + opponent.stats[4].base_stat) / 2 / 2;
+    // console.log(myAttack2)
+    let degatsInflige = Math.ceil(Math.abs(myAttack1 - myAttack2) * cf);
+    setCount(Math.floor(Math.random() * 4));
+    count === 0 ? setDegats(0) : setDegats(degatsInflige);
+
+
+    if (vieOpponent - degats > 0) {
       await setVieOpponent(vieOpponent - degats);
 
       const random = Math.floor(Math.random() * movePlayer.length);
@@ -113,13 +144,13 @@ if (vieOpponent - degats > 0) {
     }
   };
   const checkDeath = async () => {
-    if (vieOpponent <= 0) {
+    if (viePlayer - vieOpponent > 0) {
       setWinner((prevState) => ({
         ...prevState,
         name: pokemon.name,
         src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
       }));
-    } else if (viePlayer <= 0) {
+    } else if (vieOpponent - viePlayer > 0) {
       setWinner((prevState) => ({
         ...prevState,
         name: opponent.name,
@@ -134,7 +165,7 @@ if (vieOpponent - degats > 0) {
     let promise = await Promise.all([
       fetchMoveOpponentDetails(),
       fetchMoveDetails(url, name),
-      setDisplayMove(false)
+      setDisplayMove(false),
     ]).then((resp) => console.log(resp));
     return promise;
   };
@@ -145,7 +176,7 @@ if (vieOpponent - degats > 0) {
       confirmAttack(),
       confirmOpponentAttack(),
       setLoading(false),
-      setDisplayMove(true)
+      setDisplayMove(true),
     ]).then((resp) => console.log(resp));
     return promise;
   };
@@ -157,12 +188,13 @@ if (vieOpponent - degats > 0) {
 
   useEffect(() => {
     vieOpponent <= 0 && checkDeath();
-    viePlayer <= 0 && checkDeath();
   }, [vieOpponent, viePlayer]);
 
-
+  useEffect(() => {
+  viePlayer <= 0 && checkDeath();
+}, [vieOpponent, viePlayer]);
   return (
-    <div>
+    <div className="fight">
       <NavBar />
       <h1>Ready to fight</h1>
 
@@ -174,57 +206,35 @@ if (vieOpponent - degats > 0) {
               <div id="progressbar">
                 <div
                   id="indicator"
-                  style={{width : viePlayer > 0
-                      ? `${(viePlayer * 100) / pokemon.hp}%`
-                      : "0%"} }
+                  style={{
+                    width:
+                      viePlayer > 0
+                        ? `${(viePlayer * 100) / pokemon.hp}%`
+                        : "0%",
+                  }}
                 ></div>
               </div>
             </div>
             <div id="pwidget-opponent">
-              <div id="progressnum-opponent">{`${vieOpponent} PV`}</div>
+            <div id="progressnum-opponent">{`${vieOpponent} PV`}</div>
               <div id="progressbar-opponent">
                 <div
                   id="indicator-opponent"
-                  style={{width : vieOpponent > 0
-                      ? `${(vieOpponent * 100) / opponent.stats[0].base_stat}%`
-                      : "0%"} 
-                  }
+                  style={{
+                    width:
+                      vieOpponent > 0
+                        ? `${
+                            (vieOpponent * 100) / opponent.stats[0].base_stat
+                          }%`
+                        : "0%",
+                  }}
                 ></div>
               </div>
             </div>
           </div>
-          <div className="arene">
-            <div className="movePlayer">
-              {displayMove && movePlayer.slice(slice.start, slice.end).map((e, i) => (
-                <div className="sectionAttack">
-                  <div className="Attack">
-                    <button
-                      onClick={
-                        (event) => {
-                          //           setUrlAndName((prevState) => ({
-                          //             ...prevState,
-                          // name: e.move.name,
-                          // src: e.move.url,
-                          //         }))
-                          attack(event, e.move.url, e.move.name);
-                        }
+          
+          <div className="areneGlobal">
 
-                        //  debounce(attack(event,e.move.url,e.move.name), 300)
-                      }
-                    >
-                      {e.move.name}
-                    </button>
-                  </div>
-                  {/* <div>
-                {nameAttack === e.move.name && (
-                  <button onClick={() => confirmAttack()}>
-                    Lancer l'attaque?
-                  </button>
-                )}
-              </div> */}
-                </div>
-              ))}
-            </div>
 
             <div className="arene">
               <img
@@ -247,29 +257,63 @@ if (vieOpponent - degats > 0) {
         </div> */}
           </div>
           <div>
-          {loading && (
+          <div className="movePlayer">
+              {displayMove &&
+                movePlayer.slice(slice.start, slice.end).map((e, i) => (
+                  <div className="sectionAttack">
+                    <div className="Attack">
+                      <button
+                        onClick={
+                          (event) => {
+                            //           setUrlAndName((prevState) => ({
+                            //             ...prevState,
+                            // name: e.move.name,
+                            // src: e.move.url,
+                            //         }))
+                            attack(event, e.move.url, e.move.name);
+                          }
+
+                          //  debounce(attack(event,e.move.url,e.move.name), 300)
+                        }
+                      >
+                        {e.move.name}
+                      </button>
+                    </div>
+                    {/* <div>
+                {nameAttack === e.move.name && (
+                  <button onClick={() => confirmAttack()}>
+                    Lancer l'attaque?
+                  </button>
+                )}
+              </div> */}
+                  </div>
+                ))}
+            </div>
+            {loading && (
               <div className="selectTypeBattle">
-                <h4>{`${pokemon.name} a attaqué ${
+                <h4 style={{color : "#0a681f"}}>
+                {`${pokemon.name} a attaqué ${
                   opponent.name
                 } avec ${nameAttack}, ${
                   degats === 0
                     ? "l'attaque n'a eu aucun effet"
                     : `${
-                        degats> 60
+                        degats > 60
                           ? `Attention attaque critique :`
-                          : degats< 30
+                          : degats < 30
                           ? `Attaque mineure :`
                           : ""
                       } 
             l'attaque a retiré ${degats} de PV`
-                }`}</h4>
- </div>
+                }`}
+                </h4>
+              </div>
             )}
           </div>
           <div>
             {loading && (
               <div className="selectTypeBattle">
-                <h4>{`${opponent.name} a attaqué ${
+                <h4 style={{color : "#fc1706"}}>{`${opponent.name} a attaqué ${
                   pokemon.name
                 } avec ${opponentNameAttack}, ${
                   degatsOpponent === 0
@@ -286,7 +330,7 @@ if (vieOpponent - degats > 0) {
               </div>
             )}
             {loading && (
-              <div>
+              <div className="Attack">
                 <button onClick={(event) => validAttack(event)}>
                   Tour suivant
                 </button>
@@ -296,8 +340,10 @@ if (vieOpponent - degats > 0) {
         </>
       ) : (
         <div>
-          <h2>Le gagnant est : {winner.name}</h2>
-          <img src={winner.src} alt="winner" />
+        <div className="selectTypeBattle">
+          <h4>Le gagnant est : {winner.name.toUpperCase()}</h4>
+        </div>
+          <img src={winner.src}  width={"250px"} alt="winner" />
         </div>
       )}
     </div>

@@ -653,8 +653,10 @@ input {
   font-weight: bolder;
 }
 
-.right-panel-screen h1{
-  font-family: 'Courier New', Courier, monospace;
+
+#type-screen, #id-screen{
+  font-size: 12px;
+  overflow-wrap: break-word;
 }
 
 /* square buttons grid */
@@ -1278,27 +1280,33 @@ table {
 }
 
 #progressbar {
+  border-radius: 15px;
   width: 250px;
   background-color: white;
   border: 1px solid black;
-  height: 35px;
+  height: 20px;
+  box-shadow: 3px 3px 3px black;
 }
 #progressbar-opponent {
+  border-radius: 15px;
   width: 250px;
   background-color: white;
   border: 1px solid black;
-  height: 35px;
+  height: 20px;
+  box-shadow: 3px 3px 3px black;
 }
 #indicator {
+  border-radius: 15px;
   width: 100%;
-  background-color: #319d49;
-  height: 35px;
+  background: linear-gradient(to bottom right, #9bf6af, #0a681f);
+  height: 20px;
   margin: 0px;
 }
 #indicator-opponent {
+  border-radius: 15px;
   width: 100%;
-  background-color: #319d49;
-  height: 35px;
+  background: linear-gradient(to bottom right, #e79691, #fc1706);
+  height: 20px;
   margin: 0px;
 }
 
@@ -1312,9 +1320,24 @@ table {
   text-align: center;
   width: 250px;
 }
+
+#pwidget{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:10px;
+}
+
+#pwidget-opponent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size:10px;
+}
 .arene {
   display: flex;
   flex-direction: row;
+  justify-content: space-around;
 }
 
 .lifeBar {
@@ -1337,25 +1360,26 @@ table {
   margin: 1em auto 2em;
   border-radius: 5px;
   border: 2px solid black;
-  /* overflow: hidden;                     /* masque tout ce qui dépasse */
+  overflow: hidden;                     /* masque tout ce qui dépasse
   /* box-shadow: 0 .25em .5em rgb(24, 24, 24),inset 0 0 1em .25em #CCC; */
   box-shadow:
   0 0 0 10px hsl(0, 0%, 80%),
   0 0 0 15px hsl(0, 0%, 90%);
-  color: #2b73b9;
   font-size: 20px;
   text-shadow: 1px 1px 1px black;
 }
 
 .selectTypeBattle > :first-child{
+  font-family: 'Courier New', Courier, monospace;
   display: inline-block;                /* modèle de boîte en ligne */
   padding-right: 2em;                   /* un peu d'espace pour la transition */
   padding-left: 100%;                   /* placement à droite du conteneur */
   white-space: nowrap;                  /* pas de passage à la ligne */
-  animation: defilement-rtl1 10s infinite linear;
+  animation: defilement-rtl 15s infinite linear;
+  
 }
 
-@keyframes defilement-rtl1 {
+@keyframes defilement-rtl {
   0% {
     transform: translate3d(0,0,0);      /* position initiale à droite */
   }
@@ -1363,5 +1387,67 @@ table {
     transform: translate3d(-100%,0,0);  /* position finale à gauche */
   }
 }
+
+.Attack button {
+  height: 40px;
+  width: 100px;
+  margin-left: 15px;
+  margin-right: 15px;
+  background-color: #ffcb05;
+  border: 3px #3368b0 solid ;
+  color: #3368b0;
+  filter: drop-shadow(5px 5px 3px black);
+  border-radius: 10px;
+  font-size: 10px;
+   }
+  
+  .Attack button:hover {
+    animation: shake3856 0.3s linear infinite both;
+  
+   }
+   
+   @keyframes shake3856 {
+    0% {
+     -webkit-transform: translate(0);
+     transform: translate(0);
+    }
+   
+    20% {
+     -webkit-transform: translate(-2px, 2px);
+     transform: translate(-2px, 2px);
+    }
+   
+    40% {
+     -webkit-transform: translate(-2px, -2px);
+     transform: translate(-2px, -2px);
+    }
+   
+    60% {
+     -webkit-transform: translate(2px, 2px);
+     transform: translate(2px, 2px);
+    }
+   
+    80% {
+     -webkit-transform: translate(2px, -2px);
+     transform: translate(2px, -2px);
+    }
+   
+    100% {
+     -webkit-transform: translate(0);
+     transform: translate(0);
+    }
+   }
+
+   .movePlayer{
+    display: flex;
+    flex-direction: row;
+   }
+
+   .fight{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   }
 
 

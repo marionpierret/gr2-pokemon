@@ -75,6 +75,9 @@ const Select = () => {
    
      </tr>
       </div>
+      <div className="selectFooter">
+
+      </div>
       </div> 
 </div>
 
