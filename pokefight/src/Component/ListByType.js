@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import PokeDex from "./PokeDex";
 import Card from "./Card";
-import NavBar from "./NavBar";
+import NavBarSelect from "./NavBarSelect";
 
 const ListByType = () => {
   const { type } = useParams();
@@ -77,7 +77,7 @@ const ListByType = () => {
   return (
     <div className="selectCard">
       <div className="selectCardNav">
-        <NavBar />
+        <NavBarSelect />
         <h1>Select a pokemon</h1>
       </div>
       <div className="cardInstructions">

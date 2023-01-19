@@ -3,6 +3,7 @@ import { PokemonContext } from "./PokemonContext";
 import { RandomContext } from "./RandomContext";
 import axios from "axios";
 import NavBar from "./NavBar";
+import Monde from "../Images/pokemonWorld.png"
 
 const Fight = () => {
   const [pokemon, setPokemon] = useContext(PokemonContext);
@@ -196,10 +197,13 @@ const Fight = () => {
   return (
     <div className="fight">
       <NavBar />
-      <h1>Ready to fight</h1>
+      
 
       {winner.name === "" ? (
         <>
+        <div>
+        <h1>Ready to fight</h1>
+        </div>
           <div className="lifeBar">
             <div id="pwidget">
               <div id="progressnum">{`${viePlayer} PV`}</div>
@@ -339,12 +343,25 @@ const Fight = () => {
           </div>
         </>
       ) : (
+        <>
         <div>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"
+          alt="logo"
+          style={{ height: "150px" }}
+        />
         <div className="selectTypeBattle">
           <h4>Le gagnant est : {winner.name.toUpperCase()}</h4>
         </div>
-          <img src={winner.src}  width={"250px"} alt="winner" />
+        {/* <div className="winner"> */}
+          
+          {/* </div> */}
         </div>
+        <img src={winner.src}  width={"250px"} alt="winner" />
+        <div className="world">
+        
+        </div>
+        </>
       )}
     </div>
   );

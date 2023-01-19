@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Stats from "./Stats";
 import NavBar from './NavBar'
+import NavBarSelect from "./NavBarSelect"
 
 const SearchBar = (props) => {
   const inputField = document.getElementById("name-input"); // search field input
@@ -19,7 +20,7 @@ const SearchBar = (props) => {
 
   return (
     <>
-    <NavBar/>
+    <NavBarSelect/>
       <div className="logo">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/269px-International_Pok%C3%A9mon_logo.svg.png"

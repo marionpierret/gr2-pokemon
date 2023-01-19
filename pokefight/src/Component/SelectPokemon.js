@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar"
 import axios from "axios"
 
 
+
 const SelectPokemon = () => {
 const [query,setQuery] = useState("")
 const [data,setData] = useState([])

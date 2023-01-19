@@ -41,7 +41,7 @@ const PokeDex = (props) => {
 
 const addPokemon = () => {
   setPokemon((prevState) => ({
-    name: document.querySelector("#name-screen").innerHTML,
+    name: document.querySelector(".white-square3").innerHTML,
     id: props.data.id,
     hp: document.querySelector(".hp").innerHTML,
     attack: document.querySelector(".attack").innerHTML,
@@ -120,11 +120,11 @@ const addPokemon = () => {
             <div className="white-squares-container3">
               <button
                     className="white-square3"
-                    onClick={() => addPokemon()}
+                    
                   >
-                    Select this Pokemon ?
+                    {props.data.name}
                   </button>
-                 
+                  
             </div>
           </div>
           <div className="nav-buttons-container">
@@ -132,8 +132,8 @@ const addPokemon = () => {
               <div>.</div>
               <div>.</div>
             </div>
-            <div className="green-screen">
-              <span id="name-screen">{props.data.name}</span>
+            <div className="green-screen" onClick={() => addPokemon()}>
+              <span id="name-screen"> Select ?</span>
             </div>
             <div className="right-nav-container">
               <div className="bottom-right-nav-container">
