@@ -7,6 +7,7 @@
   letter-spacing: 1.5px;
 }
 
+
 .flip-card {
   background-color: transparent;
   width: 290px;
@@ -14,9 +15,35 @@
   font-family: sans-serif;
 }
 
-.pokeCard {
-  width: 100px;
+.pokeCard {  
+  width: 200px;
+  margin-left: 100px;
 }
+
+.cardInstructions{
+  max-width: 40em;               /* largeur de la fenêtre */
+  /* height: 50px; */
+  margin: 1em auto 2em;
+  border-radius: 5px;
+  border: 2px solid black;
+  overflow: hidden;                     /* masque tout ce qui dépasse */
+  /* box-shadow: 0 .25em .5em rgb(24, 24, 24),inset 0 0 1em .25em #CCC; */
+  box-shadow:
+  0 0 0 10px hsl(0, 0%, 80%),
+  0 0 0 15px hsl(0, 0%, 90%);
+  color: #2b73b9;
+  font-size: 20px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.cardInstructions > :first-child{
+  display: inline-block;                /* modèle de boîte en ligne */
+  padding-right: 2em;                   /* un peu d'espace pour la transition */
+  padding-left: 100%;                   /* placement à droite du conteneur */
+  white-space: nowrap;                  /* pas de passage à la ligne */
+  animation: defilement-rtl 5s infinite linear;
+}
+
 
 .title {
   font-size: 1.5em;
@@ -449,6 +476,8 @@ input {
   text-align: center;
   font-size: 12.5px;
   overflow-wrap: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
 }
 
 .circle {
@@ -620,6 +649,12 @@ input {
   padding-left: 8px;
   line-height: 2;
   gap: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
+}
+
+.right-panel-screen h1{
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* square buttons grid */
@@ -695,6 +730,8 @@ input {
   border: black 2px solid;
   background-color: #ffffff;
   box-shadow: inset -2px -2px gray;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bolder;
 }
 
 .white-squares-container2 {
@@ -731,7 +768,7 @@ input {
   box-shadow: inset -2px -2px gray;
   margin: 5px 5px;
   font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
+  font-weight: bold; 
   padding: 5px 0px;
 }
 
@@ -840,13 +877,40 @@ input {
   flex-direction: row;
   height: 310px;
   margin-bottom: 30px;
+  background-color: #2b73b9;
+  margin-top: 0px;
+  padding-top: 40px;
+  border: 3px black solid;
+  border-radius: 13px;
+  box-shadow:
+  0 0 0 10px hsl(0, 0%, 80%),
+  0 0 0 15px hsl(0, 0%, 90%);
+  background-color: #2b73b9;
+  overflow-x:scroll;
+  width: 100vw;
 }
 
-.listByType {
+.selectCard {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  align-content: center;
+  margin: 0px;
 }
 
+.selectCardNav{
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectCardNav h1{
+  color: #ffcb05;
+  -webkit-text-stroke: 1px #3368b0;
+  text-shadow: 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0, 0 0 2px #3368b0;
+
+}
 /* CardPokemon */
 
 /* 
@@ -978,7 +1042,7 @@ div.shadow {
 /* ----- Size and shape of cards, and gold round border
 SERVES AS "Border around name, image and info" */
 .nameimageinfo {
-  width: 110px;
+  width: 150px;
   height: 210px;
   margin: 0px;
   padding: 5px 10px 5px 10px;
@@ -997,7 +1061,7 @@ SERVES AS "Border around name, image and info" */
 .nameheaders,
 .stats,
 .costs {
-  width: 310px;
+  width: 120px;
   vertical-align: center;
 }
 
@@ -1009,14 +1073,17 @@ SERVES AS "Border around name, image and info" */
   font-weight: 600;
   margin: 0px;
   padding: 0px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 /* ----- Name of Pokemon font styling */
 .nameofanimal {
+  max-width: 10px;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 15px;
   margin: 0px;
   padding: 0px;
+text-align: center;
 }
 
 /* ----- HP font styling */
@@ -1262,6 +1329,39 @@ table {
   
   margin: 4px 0px 0px 0px;
 
+}
+
+.selectTypeBattle{
+  max-width: 40em;               /* largeur de la fenêtre */
+  /* height: 50px; */
+  margin: 1em auto 2em;
+  border-radius: 5px;
+  border: 2px solid black;
+  /* overflow: hidden;                     /* masque tout ce qui dépasse */
+  /* box-shadow: 0 .25em .5em rgb(24, 24, 24),inset 0 0 1em .25em #CCC; */
+  box-shadow:
+  0 0 0 10px hsl(0, 0%, 80%),
+  0 0 0 15px hsl(0, 0%, 90%);
+  color: #2b73b9;
+  font-size: 20px;
+  text-shadow: 1px 1px 1px black;
+}
+
+.selectTypeBattle > :first-child{
+  display: inline-block;                /* modèle de boîte en ligne */
+  padding-right: 2em;                   /* un peu d'espace pour la transition */
+  padding-left: 100%;                   /* placement à droite du conteneur */
+  white-space: nowrap;                  /* pas de passage à la ligne */
+  animation: defilement-rtl1 10s infinite linear;
+}
+
+@keyframes defilement-rtl1 {
+  0% {
+    transform: translate3d(0,0,0);      /* position initiale à droite */
+  }
+  100% {
+    transform: translate3d(-100%,0,0);  /* position finale à gauche */
+  }
 }
 
 
