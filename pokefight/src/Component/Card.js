@@ -42,6 +42,7 @@ const Card = (props) => {
   }
 
   return (
+  
     <div className="pokeCard">
       <td className="organizecardsB">
         <div className={props.type && className()}>
@@ -69,6 +70,7 @@ const Card = (props) => {
         </div>
       </td>
     </div>
+  
   );
 };
 

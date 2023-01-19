@@ -11,7 +11,7 @@ const Fight = () => {
   const [movePlayer, setMovePlayer] = useState([]);
   const [moveOpponent, setMoveOpponent] = useState([]);
   const [slice, setSlice] = useState({ start: "0", end: "4" });
-  const [powerAttack, setPowerAttack] = useState("");
+  const [powerAttack, setPowerAttack] = useState(0);
   const [opponentPowerAttack, setOpponentPowerAttack] = useState("");
   const [loading, setLoading] = useState(false);
   const [opponentNameAttack, setOpponentNameAttack] = useState("initial");
@@ -22,6 +22,7 @@ const Fight = () => {
   const [viePlayer,setViePlayer] = useState(pokemon.hp)
   const [vieOpponent,setVieOpponent] = useState(opponent.stats[0].base_stat)
   const [loadingAttack, setLoadingAttack] = useState(false)
+  const [loadingMove, setLoadingMove] = useState(false)
   const [urlAndName, setUrlAndName] = useState({name : "" , url : ""})
  
   const fetchMovePlayer = async () => {
@@ -45,20 +46,17 @@ const Fight = () => {
     }
   };
 
-console.log(loading)
-console.log(viePlayer)
-console.log(urlAndName.url)
 
-  const fetchMoveDetails = async () => {
-    try {
-      const callData = await axios.get(`${urlAndName.src}`);
-      setPowerAttack(callData.data.power);
-      setNameAttack(urlAndName.name);
+
+  const fetchMoveDetails = async (url,name) => {
+    await axios.get(`${url}`)
+    .then(res => {
+      setPowerAttack(res.data.power);
+      setNameAttack(name);
       setLoading(true);
-    } catch (err) {
-      console.log(err);
-    }
+    })
   };
+
 
   const fetchMoveOpponentDetails = async () => {
     const random = Math.floor(Math.random() * moveOpponent.length);
@@ -66,6 +64,7 @@ console.log(urlAndName.url)
       const callData = await axios.get(`${moveOpponent[random].move.url}`);
       setOpponentPowerAttack(callData.data.power);
       setOpponentNameAttack(moveOpponent[random].move.name);
+      setLoadingMove(true)
     } catch (err) {
       console.log(err);
     }
@@ -103,11 +102,10 @@ console.log(urlAndName.url)
         start: random,
         end: random + 4,
       }), slice);
-      return
+      
     }
     else if (vieOpponent - degats > 0) {
     await changeLife(vieOpponent, degats)
-    console.log(vieOpponent)
 
     const random = Math.floor(Math.random() * movePlayer.length);
 
@@ -140,34 +138,47 @@ console.log(urlAndName.url)
       }
       };
 
-  // const attack = async (event, url,name) => {
-  //   event.preventDefault()
-  //   let promise = await Promise.all([
-  //     await fetchMoveDetails(url, name),
-  //     await confirmAttack(),
-  //      fetchMoveOpponentDetails(),
-  //      confirmOpponentAttack(),
-  //      checkDeath(),
-  //      setVieOpponent(vieOpponent - degats)
-  //   ]).then((resp) => console.log(resp))
-  //   return promise
-  // }
+  const attack = async (event, url,name) => {
+    event.preventDefault()
+
+    let promise = await Promise.all([
+
+       fetchMoveOpponentDetails(),
+       fetchMoveDetails(url, name)
+    //   //  confirmOpponentAttack(),
+    //   //  checkDeath(),
+    ]).then((resp) => console.log(resp))
+    return promise
+  }
+
+  const validAttack = async (event) => {
+    event.preventDefault()
+    // fetchMoveDetails(url, name)
+    let promise = await Promise.all([
+    //   await fetchMoveDetails(url, name),
+       confirmAttack(),
+      //  fetchMoveOpponentDetails();
+       confirmOpponentAttack(),
+       setLoading(false)
+    //   //  checkDeath(),
+    ]).then((resp) => console.log(resp))
+    return promise
+  }
 
   useEffect(() => {
     fetchMovePlayer();
     fetchMoveOpponent();
   }, []);
 
-    useEffect(() => {
-      urlAndName.name !== "" &&
-      fetchMoveDetails();
-     confirmAttack();
-       fetchMoveOpponentDetails();
-       confirmOpponentAttack();
-       checkDeath();
-  }, [urlAndName]);
 
 
+  useEffect(() => {
+  vieOpponent <=0 &&
+  checkDeath();
+  viePlayer <= 0 &&
+  checkDeath();
+}, [vieOpponent,viePlayer]);
+//   console.log(urlAndName.name)
 
   return (
     <div>
@@ -199,11 +210,17 @@ console.log(urlAndName.url)
             <div className="sectionAttack">
               <div className="Attack">
                 <button
-                  onClick={() => 
-                    setUrlAndName((prevState) => ({
-          name: e.move.name,
-          src: e.move.url,
-        }))
+                  onClick={(event) => {
+          //           setUrlAndName((prevState) => ({
+          //             ...prevState,
+          // name: e.move.name,
+          // src: e.move.url,
+          //         }))
+          attack(event, e.move.url, e.move.name)
+
+                }
+                  
+  
                   //  debounce(attack(event,e.move.url,e.move.name), 300)
                   }
                 >
@@ -264,7 +281,7 @@ console.log(urlAndName.url)
             : ''} 
             l'attaque à retirer ${degatsOpponent} de PV`
           }`}
-          {/* {loading && <button onClick={() => displayAttack()}>Ok?</button>} */}
+          {loading && <div><button onClick={(event) => validAttack(event)}>Tour suivant</button></div> }
       </div>
    
     </>

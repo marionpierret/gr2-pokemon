@@ -723,13 +723,16 @@ input {
 }
 .white-square2 {
   text-align: center;
-  width: 80px;
+  width: 100px;
   height: 25px;
   border-radius: 5px;
   border: black 2px solid;
   background-color: #ffcb05;
   box-shadow: inset -2px -2px gray;
-  margin: 5px 5px
+  margin: 5px 5px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  padding: 5px 0px;
 }
 
 .selectType{
