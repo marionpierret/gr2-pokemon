@@ -67,6 +67,7 @@ const Select = () => {
           <h4>Your opponent is...</h4>
         </div>
         <div className = 'opponentDetails'>
+        
           <tr>
           <td><h2>{random.name}</h2></td>
           </tr>

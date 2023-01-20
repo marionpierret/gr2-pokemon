@@ -8,12 +8,12 @@ const NavBar = () => {
   const navigate=useNavigate()
   return (
     <div className= "navbar" style={{width:"800px",display : "flex",gap : "20px"}}>
-      {/* <Link to="/" style={{textDecorationLine: 'none', color: 'black'}}> */}
+ 
       <img src={pokeballReturn} alt='home' style={{height: '50px'}} onClick={()=>navigate("/selectPokemon")}/>
       <img src={pokeball} alt='home' style={{height: '50px'}} onClick={()=>navigate("/")}/>
        
 
-        {/* </Link> */}
+ 
     </div>
   );
 };

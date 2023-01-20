@@ -47,11 +47,7 @@ const Card = (props) => {
       <td className="organizecardsB">
         <div className={props.type && className()}>
           <table className="nameheaders">
-            {/* <tr>
-              <td className="basic" colSpan="3">
-                Basic Pokémon
-              </td>
-            </tr> */}
+     
             <tr>
               <td className="nameofanimal">{props.name}</td>
             </tr>
@@ -64,9 +60,6 @@ const Card = (props) => {
             alt="PokemonPicture"
           />
 
-          {/* <div className="infoonly">
-            <p className="description">Click here to see PokeDex stats</p>
-          </div> */}
         </div>
       </td>
     </div>

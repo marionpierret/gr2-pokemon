@@ -4,6 +4,9 @@ import { RandomContext } from "./RandomContext";
 import axios from "axios";
 import NavBar from "./NavBar";
 import Monde from "../Images/pokemonWorld.png"
+import { TrainerContext } from "./TrainerContext";
+import MenWin from "../Images/MenWin.png"
+import WomenWin from "../Images/VitoireFemme.png"
 
 const Fight = () => {
   const [pokemon, setPokemon] = useContext(PokemonContext);
@@ -43,6 +46,7 @@ const Fight = () => {
   const [displayMove, setDisplayMove] = useState(true);
   const [count, setCount] = useState(1);
   const [count1, setCount1] = useState(1);
+  const [trainer, setTrainer] = useContext(TrainerContext);
 
   const fetchMovePlayer = async () => {
     try {
@@ -150,12 +154,14 @@ const Fight = () => {
         ...prevState,
         name: pokemon.name,
         src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`,
+        winnerGame : "Player"
       }));
     } else if (vieOpponent - viePlayer > 0) {
       setWinner((prevState) => ({
         ...prevState,
         name: opponent.name,
         src: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${opponent.id}.png`,
+        winnerGame : "Opponent"
       }));
     }
   };
@@ -351,13 +357,17 @@ const Fight = () => {
           style={{ height: "150px" }}
         />
         <div className="selectTypeBattle">
-          <h4>Le gagnant est : {winner.name.toUpperCase()}</h4>
+          <h4>Le gagnant est : {winner.name.toUpperCase()}{winner.winnerGame === "Player" && `, Bravo dresseur ${trainer.name}`} </h4>
         </div>
         {/* <div className="winner"> */}
           
           {/* </div> */}
         </div>
+        <div>
+        {trainer.picture === "dresseurHomme" && winner.winnerGame === "Player" && <img src={MenWin} width={"250px"} alt="MenWin"/>}
+        {trainer.picture === "dresseurFemme" && winner.winnerGame === "Player" && <img src={WomenWin} width={"250px"} alt="MenWin"/>}
         <img src={winner.src}  width={"250px"} alt="winner" />
+        </div>
         <div className="world">
         
         </div>

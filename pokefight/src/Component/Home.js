@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <div className="home">
       <NavBarHome />
-
+      <div>
       <div className="logo">
         {" "}
         <img
@@ -37,10 +37,10 @@ const Home = () => {
             className="image-clignote"
             alt="startthegame"
             style={{ height: "70px" }}
-            onClick={() => navigate("/selectPokemon")}
+            onClick={() => navigate("/selectTrainer")}
           />
         </div>
-       
+        </div>
 
       <div className="footer">
         <Footer />

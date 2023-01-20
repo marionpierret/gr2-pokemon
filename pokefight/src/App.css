@@ -1399,6 +1399,18 @@ table {
   border-radius: 10px;
   font-size: 10px;
    }
+
+   .Send{
+    background-color: #ffcb05;
+  border: 3px #3368b0 solid ;
+  color: #3368b0;
+  filter: drop-shadow(5px 5px 3px black);
+  border-radius: 10px;
+   }
+
+   .Send:hover{
+    animation: shake3856 0.3s linear infinite both;
+   }
   
   .Attack button:hover {
     animation: shake3856 0.3s linear infinite both;
